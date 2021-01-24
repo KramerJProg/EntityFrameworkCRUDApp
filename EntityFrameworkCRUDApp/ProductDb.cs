@@ -12,7 +12,19 @@ namespace EntityFrameworkCRUDApp
         // CRUD funtionality
         public static List<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            using(ProductContext context = new ProductContext())
+            {
+                //  Query Syntax
+                List<Product> allProds =
+                    (from prod in context.Products
+                    select prod).ToList();
+
+                //  Method Syntax
+                List<Product> allProds2 =
+                    context.Products.ToList();
+
+                return allProds;
+            }
         }
 
         /// <summary>
@@ -34,7 +46,16 @@ namespace EntityFrameworkCRUDApp
 
         public static Product Update(Product p)
         {
-            throw new NotImplementedException();
+            using(var context = new ProductContext())
+            {
+                context.Database.Log = Console.WriteLine;
+                //  Prepare Update query for product
+                context.Entry(p).State = EntityState.Modified;
+
+                context.SaveChanges();
+
+                return p;
+            }
         }
 
         public static void Delete(Product p)
@@ -55,7 +76,25 @@ namespace EntityFrameworkCRUDApp
 
         public static void Delete(int id)
         {
-            throw new NotImplementedException();
+            using(var context = new ProductContext())
+            {
+                //  Get product to delete from database
+
+                //  Query syntax
+                Product prodToDelete =
+                    (from p in context.Products
+                     where p.ProductId == id
+                     select p).Single();
+
+                // Method Syntax
+                Product prodToDelete2 =
+                    context.Products
+                           .Where(p => p.ProductId == id)
+                           .Single();
+
+                context.Entry(prodToDelete).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
     }
 }
