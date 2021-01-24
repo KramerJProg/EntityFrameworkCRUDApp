@@ -30,5 +30,35 @@ namespace EntityFrameworkCRUDApp
             //dbContext.SaveChanges();
             //MessageBox.Show("Added");
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var p1 = new Product()
+            {
+                Title = "Widget",
+                Price = 5.99
+            };
+
+            ProductDb.Add(p1);
+
+            var p2 = new Product()
+            {
+                Title = "Gaming Chair",
+                Price = 299.99
+            };
+
+            ProductDb.Add(p2);
+
+            p1.Price = 15.50;
+
+            ProductDb.Update(p1);
+
+            List<Product> prods = ProductDb.GetAllProducts();
+
+            ProductDb.Delete(p1);
+            ProductDb.Delete(p2);
+
+            prods = ProductDb.GetAllProducts();
+        }
     }
 }
