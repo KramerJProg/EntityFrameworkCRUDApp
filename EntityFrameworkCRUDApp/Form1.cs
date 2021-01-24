@@ -19,16 +19,16 @@ namespace EntityFrameworkCRUDApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Product p = new Product()
-            {
-                Title = "Gadget",
-                Price = 9.99
-            };
+            //Product p = new Product()
+            //{
+            //    Title = "Gadget",
+            //    Price = 9.99
+            //};
 
-            ProductContext dbContext = new ProductContext();
-            dbContext.Products.Add(p);
-            dbContext.SaveChanges();
-            MessageBox.Show("Added");
+            //ProductContext dbContext = new ProductContext();
+            //dbContext.Products.Add(p);
+            //dbContext.SaveChanges();
+            //MessageBox.Show("Added");
         }
     }
 }
